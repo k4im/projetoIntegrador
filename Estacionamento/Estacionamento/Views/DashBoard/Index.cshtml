@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Estacionamento.Models.Car>
+
+<a asp-controller="DashBoard" asp-action="AddCar" class="btn btn-primary">Add Car</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Hora de chegada</th>
+      <th scope="col">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+
+        @foreach (var car in Model)
+        {
+          <tr>
+                <th>@car.Id</th>     
+                <th>@car.Marca</th>
+                <th>@car.Modelo</th>
+                <th>@car.Chegada</th>
+                <th>
+                    <div>
+                        <a asp-controller="DashBoard" asp-action="Update" asp-route-id="@car.Id" class="btn btn-success">Atualizar</a>
+                        <a asp-controller="DashBoard" asp-action="Delete" asp-route-id="@car.Id" class="btn btn-danger">Delete</a>
+                    </div>
+                </th>
+            </tr>
+        }
+
+  </tbody>
+</table>

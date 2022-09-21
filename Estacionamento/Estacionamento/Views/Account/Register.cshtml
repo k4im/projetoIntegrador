@@ -1,0 +1,34 @@
+﻿@model Estacionamento.Models.ViewModels.RegisterVM
+
+<form method="post" aps-controller="Account" asp-action="Register">
+    <div class="mb-3">
+        <label for="email" class="form-label">Endereço de email</label>
+        <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Endereço de Email">
+        <span asp-validation-for="Email" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input asp-for="Password" type="password" class="form-control" id="password">
+        <span asp-validation-for="Password" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="confirmpassword" class="form-label">Confirmar Password</label>
+        <input asp-for="ConfirmPassowrd" type="password" class="form-control" id="confirmpassword">
+        <span asp-validation-for="ConfirmPassowrd" class="text-danger" />
+    </div>
+    <div class="form-group row">
+        <label class="mb-3" asp-for="RoleName">
+            <div class="mb-3">
+                <select asp-for="RoleName" asp-items="@Estacionamento.Helpers.UserHelper.GetRoles()" class="form-control">
+
+                </select>
+                <span asp-validation-for="RoleName" class="text-danger"/>
+            </div>
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

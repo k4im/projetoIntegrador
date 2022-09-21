@@ -1,0 +1,26 @@
+﻿@model Estacionamento.Models.Car
+
+<form method="post" asp-controller="DashBoard" asp-action="Update">
+    <input asp-for="Id" hidden />
+    <div class="mb-3">
+        <label for="marca" class="form-label">Marca do carro</label>
+        <input asp-for="Marca" type="text" class="form-control" id="marca" placeholder="marca do carro">
+        <span asp-validation-for="Marca" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="modelo" class="form-label">Modelo do carro</label>
+        <input asp-for="Modelo" type="text" class="form-control" id="modelo">
+        <span asp-validation-for="Modelo" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="placa" class="form-label">Placa do carro</label>
+        <input asp-for="Placa" type="text" class="form-control" id="placa">
+        <span asp-validation-for="Placa" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="chegada" class="form-label">Data e hora de chegadado carro</label>
+        <input asp-for="Chegada" type="datetime" class="form-control" id="chegada">
+        <span asp-validation-for="Chegada" class="text-danger" />
+    </div>
+    <button type="submit" class="btn btn-success">Atualizar</button>
+</form>

@@ -1,0 +1,18 @@
+﻿@model Estacionamento.Models.ViewModels.LoginVM
+<form method="post" aps-controller="Account" asp-action="Login">
+    <div class="mb-3">
+        <label for="email" class="form-label">Endereço de email</label>
+        <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Endereço de Email">
+        <span asp-validation-for="Email" class="text-danger" />
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input asp-for="Password" type="password" class="form-control" id="password">
+        <span asp-validation-for="Password" class="text-danger"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+@section Scripts{
+    <partial name ="_ValidationScriptsPartial"/>
+}
