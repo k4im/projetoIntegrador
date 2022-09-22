@@ -1,8 +1,8 @@
 <h1>PROJETO INTEGRADOR SENAC</h1>  
 
-<p>Projeto relizado para o curso Jovem Programador do Senac</p>
-<p>A proposta do projeto é a relização da integração de backend, frontend e banco de dados</p>
-<p>Para que então seja possivel realizar uma operação de CRUD dentro do projeto</p>
+<p>Projeto relizado para o curso Jovem Programador do Senac,
+a proposta do projeto é a relização da integração de backend, frontend e banco de dados,
+para que então seja possivel realizar uma operação de CRUD dentro do projeto</p>
 
 <h2>Sobre o projeto</h2>
 
