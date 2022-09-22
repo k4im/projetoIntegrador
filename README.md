@@ -1,3 +1,4 @@
-# projetoIntegrador
-projetoIntegrador
-Meu primeiro commitw
+Projeto Integrador SENAC  
+
+Projeto desenvolvido com banco de dados sqlLite e MVC dotnet.
+Foi realizado migração de dados utilziando EntityFrameWork e IdentityFrameWork.
