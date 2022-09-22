@@ -9,3 +9,8 @@
 <p>Foi utilizado EntityFrameWork para realizar a conexão de banco dados com a parte de backend escrita em Dotnet.</p>
 <p>Foi utilizado também IdentityFrameWork para realizar a verificação de logins, roles, hash de password, e verificação no momento de login.</p>
 <p>Utilizando o padrão MVC e também ORM, gerando um banco assim a partir do codigo já escrito.</p>
+
+<h2>Banco Utilizado</h2>
+
+<p>O banco de escolha foi o SqlLite, por se tratar de um projeto de pequena escala e pela facilidade de trabalhar com o banco em um arquivo só.</p>
+
