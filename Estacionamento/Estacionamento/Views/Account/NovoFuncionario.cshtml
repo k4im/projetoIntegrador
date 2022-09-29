@@ -23,7 +23,7 @@
                     <div class="form-group row">
                         <label class="mb-3" asp-for="RoleName">
                             <div class="mb-3">
-                                <select asp-for="RoleName" asp-items="@Estacionamento.Helpers.UserHelper.GetRoles()" class="form-control">
+                                <select asp-for="RoleName" asp-items="@Estacionamento.Helpers.UserHelper.RolesParaGerente()" class="form-control">
                                 </select>
                                 <span asp-validation-for="RoleName" class="text-danger" />
                             </div>
@@ -38,4 +38,8 @@
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
+}@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
 }

@@ -1,0 +1,15 @@
+﻿@model Estacionamento.Models.AppUser
+
+<form method="post" aps-controller="Admin" asp-action="Delete">
+    <input asp-for="Id" hidden/>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input asp-for="Email" disabled type="email" class="form-control" id="email">
+        <span asp-validation-for="Email" class="text-danger" />
+    </div>
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

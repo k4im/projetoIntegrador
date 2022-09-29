@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.4.0" />
+    <PackageReference Include="Autofac.Extras.Moq" Version="6.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="Moq" Version="4.18.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Estacionamento\Estacionamento.csproj" />
+    <ProjectReference Include="..\Estacionamento.Database\Estacionamento.Database.csproj" />
+  </ItemGroup>
+
+</Project>

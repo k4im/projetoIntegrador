@@ -1,10 +1,11 @@
-﻿@model Estacionamento.Models.ViewModels.RegisterVM
+﻿@model Estacionamento.Models.ViewModels.ResetPwdVM
 
 <div class="container">
     <div class="col">
         <div class="d-flex flex-row-reverse">
             <div class="p-2">
-                <form method="post" aps-controller="Account" asp-action="Register">
+                <form method="post" aps-controller="Account" asp-action="ResetPwd">
+                    <input asp-for="Code" hidden/>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Endereço de Email">
@@ -20,22 +21,12 @@
                         <input asp-for="ConfirmPassowrd" type="password" class="form-control" id="confirmpassword">
                         <span asp-validation-for="ConfirmPassowrd" class="text-danger" />
                     </div>
-                    <div class="form-group row">
-                        <label class="mb-3" asp-for="RoleName">
-                            <div class="mb-3">
-                                <select asp-for="RoleName" asp-items="@Estacionamento.Helpers.UserHelper.GetRoles()" class="form-control">
-                                </select>
-                                <span asp-validation-for="RoleName" class="text-danger" />
-                            </div>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-primary">Resetar</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
 }

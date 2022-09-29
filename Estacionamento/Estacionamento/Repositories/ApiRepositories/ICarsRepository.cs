@@ -5,10 +5,11 @@ namespace Estacionamento.Repositories.ApiRepositories
 {
     public interface ICarsRepository
     {
-        Task<List<Car>> GetCars();
-        Task<ActionResult> InsertCar(Car model);
-        Task<ActionResult> UpdateCar(Car model, int? id);
-        Task<ActionResult> DeleteCar(int? id);
+        List<Car> GetCars();
+        Car GetCarById(int? id);
+        void AddCar (Car car);
+        void UpdateCar (Car car);
+        void DeleteCar(int? id);
 
     }
 }

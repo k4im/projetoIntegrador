@@ -7,65 +7,48 @@ namespace Estacionamento.Repositories.ApiRepositories
 {
     public class CarRepository : ControllerBase, ICarsRepository
     {
-        private readonly DataContext _db;
+        private readonly CarDataContext _db;
 
-        public CarRepository(DataContext db) => _db = db;
-        public Task<List<Car>> GetCars()
+        public CarRepository(CarDataContext db) => _db = db;
+
+
+        public List<Car> GetCars()
         {
             var cars = _db.Cars;
-            return cars.ToListAsync();
+            return cars.ToList();
         }
-
-        public async Task<ActionResult> InsertCar(Car model)
+        public Car GetCarById(int? id)
         {
-            if(ModelState.IsValid)
-            {
-                var car = new Car()
-                {
-                    Id = model.Id,
-                    Marca = model.Marca,
-                    Modelo = model.Modelo,
-                    Placa = model.Placa
-
-                };
-                _db.Cars.Add(car);
-                await _db.SaveChangesAsync();
-                return Ok();
-            }
-            return BadRequest(ModelState);
+            var car = _db.Cars.Find(id);
+            return car;
         }
 
-        public async Task<ActionResult> UpdateCar(Car model, int? id)
+        public void AddCar(Car car)
         {
-            try
+            var carro = new Car()
             {
-                if (!ModelState.IsValid) return BadRequest(ModelState);
-                var car = _db.Cars.FirstOrDefaultAsync(c => c.Id == id);
-                _db.Cars.Update(model);
-                await _db.SaveChangesAsync();
-                return Ok();
-            }
-            catch(Exception)
-            {
-                return StatusCode(500, "Não foi possivel atualizar o carro por motivos internos");
-            }
+                Id = car.Id,
+                Marca = car.Marca,
+                Modelo = car.Modelo,
+                Placa = car.Placa,
+                Chegada = car.Chegada
+            };
+
+            _db.Cars.Add(carro);
+            _db.SaveChanges();
         }
-        public async Task<ActionResult> DeleteCar(int? id)
+
+        public void UpdateCar(Car car)
         {
-            try
-            {
-                var car = await _db.Cars.FirstOrDefaultAsync(x => x.Id == id);
-                if (car == null) return NotFound();
-                _db.Cars.Remove(car);
-                await _db.SaveChangesAsync();
-                return Ok();
-            }
-            catch(Exception)
-            {
-                return StatusCode(500, "Não foi possivel atualizar o carro por motivos internos");
-            }
+            _db.Entry<Car>(car).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
-
+        public void DeleteCar(int? id)
+        {
+            var car = GetCarById(id);
+            _db.Cars.Remove(car);
+            _db.SaveChanges();
+        }
     }
 }

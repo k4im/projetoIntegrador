@@ -1,43 +1,51 @@
 ﻿using Estacionamento.Database;
 using Estacionamento.Helpers;
+using Estacionamento.Models;
 using Estacionamento.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Estacionamento.Repositories.ApiRepositories
 {
+    
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _db;
 
         public UserRepository(DataContext db) => _db = db;
 
-        public List<AdminVM> GetAdmins()
+        public List<AppUser> GetUsers()
         {
-            var usersAdmin = (from user in _db.Users
-                         join userRole in _db.UserRoles on user.Id equals userRole.UserId
-                         join roles in _db.Roles.Where(x => x.Name == UserHelper.Admin) on userRole.RoleId equals roles.Id
-                         select new AdminVM { Id = user.Id, Name = user.Name }).ToList();
-            return usersAdmin;
+             var users = (from user in _db.Users
+                          join userRole in _db.UserRoles on user.Id equals userRole.UserId
+                          join role in _db.Roles on userRole.RoleId equals role.Id
+                          select new AppUser()
+                          {
+                              Id = user.Id,
+                              Email = user.Email,
+                              Name = role.Name
+                          }).ToList();
+            return users;
+        }
+        public AppUser GetUserById(string? id)
+        {
+            var user = _db.Users.Find(id);
+            return user;
         }
 
-        public List<FuncionarioVM> GetFuncionarios()
+        public void DeleteUser(string? id)
         {
-            var usersFuncionarios = (from user in _db.Users
-                               join userRole in _db.UserRoles on user.Id equals userRole.UserId
-                               join roles in _db.Roles.Where(x => x.Name == UserHelper.Funcionario) on userRole.RoleId equals roles.Id
-                               select new FuncionarioVM
-                               { Id = user.Id, Name = user.Name}).ToList();
-            return usersFuncionarios;
+            var user = GetUserById(id);
+            _db.Users.Remove(user);
+            _db.SaveChanges();
         }
 
-        public List<GerenteVM> GetGerentes()
+        public void UpdateUser(AppUser model)
         {
-            var usersGerentes = (from user in _db.Users
-                                 join userRole in _db.UserRoles on user.Id equals userRole.UserId
-                                 join roles in _db.Roles.Where(x => x.Name == UserHelper.Gerente) on userRole.RoleId equals roles.Id
-                                 select new GerenteVM
-                                 { Id = user.Id, Name = user.Name}).ToList();
-            return usersGerentes;
+            _db.Entry<AppUser>(model).State = EntityState.Modified;
+            _db.SaveChanges();
+
         }
     }
 }

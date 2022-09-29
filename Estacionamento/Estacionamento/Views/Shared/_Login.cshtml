@@ -1,36 +1,69 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Estacionamento.Models.AppUser> SignInManager
 @inject Microsoft.AspNetCore.Identity.UserManager<Estacionamento.Models.AppUser> UserManager
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContext
+
  @if (SignInManager.IsSignedIn(User))
  {
      <form method="post" asp-controller="Account" asp-action="Logoff">
          <ul class="nav navbar-nav">
-         <li>
-             <a method="get" asp-controller="DashBoard" asp-action="Index" class="btn btn-outline-dark mx-2">DashBoard</a>
-         </li>
 
          <li>
-             <button type="submit" class="btn btn-outline-danger mx-2">LogOff</button>
+             <button type="submit" class="btn btn-outline-danger mx-2">Sair</button>
          </li>
          </ul>
  </form>
+@if (User.IsInRole("Funcionario"))
+{
+        <ul class="nav navbar-nav">
+            <li>
+                <a method="get" asp-controller="DashBoard" asp-action="Index" class="btn btn-outline-dark mx-2">Dash Board</a>
+            </li>
+        </ul>
+}
  @if(User.IsInRole("Admin"))
  {
-     <form method="post" asp-controller="Account" asp-action="newAdmin">
-            <ul class="nav navbar-nav">
-                    <li class="text-dark nav-link">Hello!</li>
-                <button type="submit" class="btn btn-outline-warning">New Admin</button>
-            </ul>
-     </form>
+     <div class="btn-group">
+        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Opções
+        </button>
+
+        <ul class="dropdown-menu">
+            <li class="dropdown-item">
+                <form method="post" asp-controller="Account" asp-action="newAdmin">
+                    <button type="submit" class="btn btn-outline-warning">Novo usuario</button>
+                </form>
+            </li>
+            <li class="dropdown-item">
+                <form method="get" asp-controller="Admin" asp-action="Index">
+                    <button type="submit" class="btn btn-outline-warning">Painel ADM</button>
+                </form>
+            </li>
+            <li class="dropdown-item">
+                <a method="get" asp-controller="DashBoard" asp-action="Index" class="btn btn-outline-warning">Dash Board</a>
+            </li>
+        </ul>
+     </div>
  }
  @if (User.IsInRole("Gerente"))
  {
-     <form method="post" asp-controller="Account" asp-action="Register">
-         <ul class="nav navbar-nav">
-             <li class="text-dark nav-link">Hello!</li>
-             <button type="submit" class="btn btn-outline-warning">New Employee</button>
-         </ul>
-     </form>
+     <div class="btn-group">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Opções
+            </button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item">
+                    <form method="post" asp-controller="Account" asp-action="NovoFuncionario">
+                        <button type="submit" class="btn btn-outline-warning">Novo funcionario</button>
+                    </form>
+                </li>
+                <li class="dropdown-item">
+                    <a method="get" asp-controller="DashBoard" asp-action="Index" class="btn btn-outline-warning">Dash Board</a>
+                </li>                
+            </ul>
+     </div>
  }
+
 
 
 }
@@ -40,11 +73,8 @@
      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
          <ul class="nav navbar-nav">
              <li class="nav-item">
-                 <a class="btn btn-outline-primary mx-2" asp-controller="Account" asp-action="Register">Register</a>
-             </li>
-             <li class="nav-item">
                  <div class="d-flex flex-row-reverse bd-highlight">
-                     <a asp-controller="Account" asp-action="Login" class="btn btn-outline-success">Login</a>
+                     <a asp-controller="Account" asp-action="Login" class="btn btn-outline-success">Logar</a>
                  </div>
              </li>
          </ul>

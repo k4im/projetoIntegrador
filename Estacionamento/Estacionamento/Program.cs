@@ -16,7 +16,16 @@ namespace Estacionamento
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<DataContext>(opt => opt.UseSqlite("Data Source=Estacionamento.db"));
             builder.Services.AddDbContext<CarDataContext>(opt => opt.UseSqlite("Data Source=Veiculos.db"));
-            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<DataContext>();
+            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
+            builder.Services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequiredLength = 8;
+                opt.Password.RequireNonAlphanumeric = true;
+                opt.Password.RequireLowercase = true;
+                opt.Password.RequireUppercase = true;
+                //opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(50);
+                //opt.Lockout.MaxFailedAccessAttempts = 2;
+            });
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<ICarsRepository, CarRepository>();
             var app = builder.Build();
@@ -36,7 +45,7 @@ namespace Estacionamento
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+             
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
